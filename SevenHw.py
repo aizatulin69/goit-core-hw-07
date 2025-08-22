@@ -112,18 +112,16 @@ def check_args(min_args: int):
     return decorator
 
 
-@input_error
 def parse_input(command: str):
     if not command.strip():
-        raise ValueError("Empty input")
+        return None, []
     parts = command.strip().split()
     return parts[0].lower(), parts[1:]
 
 
 @input_error
 @check_args(1)
-@input_error
-def add_contact(args, book: AddressBook):
+def add_contact(book: AddressBook, args):
     if not args:
         raise ValueError("You must provide a name")
     name, *phones = args
